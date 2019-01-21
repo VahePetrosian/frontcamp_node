@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "acee2c16-7808-41eb-b34a-7e70b4cee33e",
+		"name": "Vage_NodeJS_Part1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "title_value",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "description_value",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/news",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"news"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "5c4203225445425ca888f137",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/news/5c4203225445425ca888f137",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"news",
+						"5c4203225445425ca888f137"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "5c4203225445425ca888f137",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "new_title_value",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "new_description_value",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/news/5c4203225445425ca888f137",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"news",
+						"5c4203225445425ca888f137"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "5c4203225445425ca888f137",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/news/5c4203225445425ca888f137",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"news",
+						"5c4203225445425ca888f137"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
