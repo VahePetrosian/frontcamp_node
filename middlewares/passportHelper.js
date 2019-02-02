@@ -1,7 +1,11 @@
 module.exports = {
     initPassport() {
+        const FACEBOOK_APP_ID = '123';
+        const FACEBOOK_APP_SECRET = '123';
+        const FACEBOOK_CALLBACK_URL = 'http://localhost:3000/login/facebook/callback'
         const Strategy = require('passport-local').Strategy
         const usersModel = require('../models/users');
+        const FacebookStrategy = require('passport-facebook').Strategy;
         const passport = require('passport');
 
         passport.use(new Strategy({ usernameField: 'email' },
@@ -13,6 +17,19 @@ module.exports = {
                     return cb(null, result);
                 });
             }));
+
+        passport.use(new FacebookStrategy({
+            clientID: FACEBOOK_APP_ID,
+            clientSecret: FACEBOOK_APP_SECRET,
+            callbackURL: FACEBOOK_CALLBACK_URL
+        },
+            function (accessToken, refreshToken, profile, done) {
+                usersModel.findOne({ email: profile.email }).exec(function (err, user) {
+                    if (err) { return done(err); }
+                    done(null, user);
+                })
+            }
+        ));
 
         passport.serializeUser(function (user, cb) {
             cb(null, user.id);

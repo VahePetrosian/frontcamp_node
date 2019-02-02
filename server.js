@@ -29,6 +29,8 @@ app.post('/login',
   function (req, res) {
     res.status(200).json();
   });
+app.get('/login/facebook', passport.authenticate('facebook'));
+app.get('/login/facebook/callback', passport.authenticate('facebook'));
 
 app.use(errorHandler.internalError);
 app.use(errorHandler.notFound);
