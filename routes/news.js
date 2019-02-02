@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const newsController = require('../controllers/news');
+const auth = require('../middlewares/auth');
+
 router.get('/:id?', newsController.get);
-router.post('/', newsController.add);
-router.put('/:id?', newsController.update);
-router.delete('/:id?', newsController.delete);
+router.post('/', auth, newsController.add);
+router.put('/:id?', auth, newsController.update);
+router.delete('/:id?', auth, newsController.delete);
 module.exports = router;
