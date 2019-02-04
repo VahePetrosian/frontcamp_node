@@ -4,13 +4,11 @@ const validation = require('../middlewares/validation');
 
 module.exports = {
   get: function (req, res, next) {
-    let id = req.params.id || req.body.id;
-
-    if (!validation.validateoOjectId(id, req, res, next)) {
-      return;
-    }
-
+    let id = req.params.id || req.body.id; 
     if (id) {
+      if (!validation.validateoOjectId(id, req, res, next)) {
+        return;
+      }
       newsModel.findById(id).exec(function (err, result) {
         if (err) {
           errorHandler.internalError(err, req, res, next);
@@ -60,11 +58,9 @@ module.exports = {
   },
   update: function (req, res, next) {
     let id = req.params.id || req.body.id;
-
     if (!validation.validateoOjectId(id, req, res, next)) {
       return;
     }
-
     newsModel.updateOne({ _id: id }, {
       author: req.body.author,
       urlToImage: req.body.urlToImage,
@@ -90,11 +86,9 @@ module.exports = {
   },
   delete: function (req, res, next) {
     let id = req.params.id || req.body.id;
-
     if (!validation.validateoOjectId(id, req, res, next)) {
       return;
     }
-
     newsModel.deleteOne({ _id: id }, function (err, result) {
       if (err)
         errorHandler.internalError(err, req, res, next);

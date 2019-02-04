@@ -6,11 +6,9 @@ module.exports = {
   get: function (req, res, next) {
     let emailToFind = req.params.email || req.body.email;
     if (emailToFind) {
-
       if (!validation.validateEmail(emailToFind, req, res, next)) {
         return;
       }
-
       usersModel.findOne({ email: emailToFind }).exec(function (err, result) {
         if (err)
           errorHandler.internalError(err, req, res, next);
@@ -45,11 +43,9 @@ module.exports = {
       name: req.body.name,
       surname: req.body.surname,
     });
-
     if (!validation.validateEmail(usersmodel.email, req, res, next)) {
       return;
     }
-
     usersmodel.setPassword(req.body.password);
     usersmodel.save(function (err) {
       if (err) {
@@ -67,11 +63,9 @@ module.exports = {
   },
   testauth: function (req, res, next) {
     let emailToAuth = req.body.email;
-
     if (!validation.validateEmail(emailToAuth, req, res, next)) {
       return;
     }
-
     usersModel.findOne({ email: emailToAuth }, function (err, user) {
       if (err)
         errorHandler.internalError(err, req, res, next);
@@ -87,11 +81,9 @@ module.exports = {
   },
   delete: function (req, res, next) {
     let emailToDelete = req.params.email || req.body.email;
-
     if (!validation.validateEmail(emailToDelete, req, res, next)) {
       return;
     }
-
     usersModel.deleteOne({ email: emailToDelete }, function (err, result) {
       if (err)
         errorHandler.internalError(err, req, res, next);
