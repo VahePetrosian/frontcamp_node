@@ -1,9 +1,10 @@
-const FACEBOOK_APP_ID = '123';
-const FACEBOOK_APP_SECRET = '123';
-const FACEBOOK_CALLBACK_URL = 'http://localhost:3000/login/facebook/callback'
+const GOOGLE_CLIENT_ID = '537458633734-qtnbigt576nqvcejt57tn8i50ahkq93n.apps.googleusercontent.com';
+const GOOGLE_CLIENT_SECRET = 'Hmm2X40fvIoF9omy1I3cQrDi';
+const GOOGLE_CALLBACK_URL = 'http://localhost:3000/login/google/callback';
 const Strategy = require('passport-local').Strategy
 const usersModel = require('../models/users');
-const FacebookStrategy = require('passport-facebook').Strategy;
+const googleUser = require('./googleUserHelper');
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const passport = require('passport');
 
 module.exports = {
@@ -18,16 +19,13 @@ module.exports = {
                 });
             }));
 
-        passport.use(new FacebookStrategy({
-            clientID: FACEBOOK_APP_ID,
-            clientSecret: FACEBOOK_APP_SECRET,
-            callbackURL: FACEBOOK_CALLBACK_URL
+        passport.use(new GoogleStrategy({
+            clientID: GOOGLE_CLIENT_ID,
+            clientSecret: GOOGLE_CLIENT_SECRET,
+            callbackURL: GOOGLE_CALLBACK_URL
         },
             function (accessToken, refreshToken, profile, done) {
-                usersModel.findOne({ email: profile.email }).exec(function (err, user) {
-                    if (err) { return done(err); }
-                    done(null, user);
-                })
+                googleUser.findOrCreateUser(profile, accessToken, done);
             }
         ));
 

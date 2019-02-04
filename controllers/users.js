@@ -5,12 +5,12 @@ const validation = require('../middlewares/validation');
 module.exports = {
   get: function (req, res, next) {
     let emailToFind = req.params.email || req.body.email;
-
-    if (!validation.validateEmail(emailToFind, req, res, next)) {
-      return;
-    }
-
     if (emailToFind) {
+
+      if (!validation.validateEmail(emailToFind, req, res, next)) {
+        return;
+      }
+
       usersModel.findOne({ email: emailToFind }).exec(function (err, result) {
         if (err)
           errorHandler.internalError(err, req, res, next);

@@ -8,6 +8,8 @@ const UsersSchema = new Schema({
   surname: { type: String, trim: true },
   hash: { type: String },
   salt: { type: String },
+  googleId: { type: String },
+  googleAccessToken: { type: String },
 });
 
 UsersSchema.methods.setPassword = function (password) {

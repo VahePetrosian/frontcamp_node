@@ -29,8 +29,15 @@ app.post('/login',
   function (req, res) {
     res.status(200).json();
   });
-app.get('/login/facebook', passport.authenticate('facebook'));
-app.get('/login/facebook/callback', passport.authenticate('facebook'));
+
+app.get('/login/google',
+  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+
+app.get('/login/google/callback',
+  passport.authenticate('google'),
+  function (req, res) {
+    res.render('hello.jade', { title: 'Hello', name: req.user.name, authData: req.user });
+  });
 
 app.use(errorHandler.internalError);
 app.use(errorHandler.notFound);
