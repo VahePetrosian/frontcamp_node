@@ -1,13 +1,13 @@
+const FACEBOOK_APP_ID = '123';
+const FACEBOOK_APP_SECRET = '123';
+const FACEBOOK_CALLBACK_URL = 'http://localhost:3000/login/facebook/callback'
+const Strategy = require('passport-local').Strategy
+const usersModel = require('../models/users');
+const FacebookStrategy = require('passport-facebook').Strategy;
+const passport = require('passport');
+
 module.exports = {
     initPassport() {
-        const FACEBOOK_APP_ID = '123';
-        const FACEBOOK_APP_SECRET = '123';
-        const FACEBOOK_CALLBACK_URL = 'http://localhost:3000/login/facebook/callback'
-        const Strategy = require('passport-local').Strategy
-        const usersModel = require('../models/users');
-        const FacebookStrategy = require('passport-facebook').Strategy;
-        const passport = require('passport');
-
         passport.use(new Strategy({ usernameField: 'email' },
             function (username, password, cb) {
                 usersModel.findOne({ email: username }).exec(function (err, result) {
