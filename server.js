@@ -58,6 +58,10 @@ app.get('/login/google/callback',
 app.use(errorHandler.internalError);
 app.use(errorHandler.notFound);
 
-app.listen(3000, function () {
-  console.log('Server on port 3000 started');
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(3000, function () {
+    console.log('Server on port 3000 started');
+  });
+}
+
+module.exports = app;

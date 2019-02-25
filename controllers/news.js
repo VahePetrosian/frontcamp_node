@@ -6,7 +6,8 @@ module.exports = {
   get: function (req, res, next) {
     let id = req.params.id || req.body.id; 
     if (id) {
-      if (!validation.validateoOjectId(id, req, res, next)) {
+      if (!validation.validateoOjectId(id)) {
+        errorHandler.badRequest(req, res, next);
         return;
       }
       newsModel.findById(id).exec(function (err, result) {
@@ -58,7 +59,8 @@ module.exports = {
   },
   update: function (req, res, next) {
     let id = req.params.id || req.body.id;
-    if (!validation.validateoOjectId(id, req, res, next)) {
+    if (!validation.validateoOjectId(id)) {
+      errorHandler.badRequest(req, res, next);
       return;
     }
     newsModel.updateOne({ _id: id }, {
@@ -86,7 +88,8 @@ module.exports = {
   },
   delete: function (req, res, next) {
     let id = req.params.id || req.body.id;
-    if (!validation.validateoOjectId(id, req, res, next)) {
+    if (!validation.validateoOjectId(id)) {
+      errorHandler.badRequest(req, res, next);
       return;
     }
     newsModel.deleteOne({ _id: id }, function (err, result) {
