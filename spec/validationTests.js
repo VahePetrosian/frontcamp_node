@@ -2,7 +2,7 @@ var assert = require('assert');
 var validator = require('../middlewares/validation');
 
 describe('Email validation ', function () {
-    it(' should not be empty', function () {
+    it('must have value', function () {
         assert.equal(validator.validateEmail(''), false);
     });
     it('@ is required', function () {
@@ -31,22 +31,22 @@ describe('Email validation ', function () {
     });
 });
 describe('ObjectId validation ', function () {
-    it(' should not be empty', function () {
+    it('must have value', function () {
         assert.equal(validator.validateoOjectId(''), false);
     });
-    it(' length must be 24', function () {
+    it('length can not be smaller than 24 symbols', function () {
         assert.equal(validator.validateoOjectId('01234567890123456789ABC'), false);
     });
-    it(' length must be 24', function () {
+    it('length can not be bigger than 24 symbols', function () {
         assert.equal(validator.validateoOjectId('01234567890123456789ABCDE'), false);
     });
-    it(' special symbols are not allowed', function () {
+    it('special symbols are not allowed', function () {
         assert.equal(validator.validateoOjectId('01234567890123456789ABC%'), false);
     });
-    it(' only a-f letters are allowed', function () {
+    it('only a-f letters are allowed', function () {
         assert.equal(validator.validateoOjectId('01234567890123456789ABCG'), false);
     });
-    it(' should not be case sensative', function () {
+    it('should not be case sensative', function () {
         assert.equal(validator.validateoOjectId('1a2b3c4d5e6f7A8B9C0D1E2F'), true);
     });
 });

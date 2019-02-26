@@ -7,7 +7,7 @@ function buildResponse() {
 }
 
 describe('Error handler ', function () {
-    it(' bad request status code should be 400', function (done) {
+    it('bad request status code is 400', function (done) {
         var response = buildResponse();
         var request = http_mocks.createRequest();
         response.on('end', function () {
@@ -17,7 +17,7 @@ describe('Error handler ', function () {
         errorHandler.badRequest(request, response)
     });
 
-    it(' internal error status code should be 500', function (done) {
+    it('internal error status code is 500', function (done) {
         var response = buildResponse();
         var request = http_mocks.createRequest();
         response.on('end', function () {
@@ -27,7 +27,7 @@ describe('Error handler ', function () {
         errorHandler.internalError('', request, response)
     });
 
-    it(' unauthorized status code should be 401', function (done) {
+    it('unauthorized status code is 401', function (done) {
         var response = buildResponse();
         var request = http_mocks.createRequest();
         response.on('end', function () {
@@ -37,7 +37,7 @@ describe('Error handler ', function () {
         errorHandler.unauthorized(request, response)
     });
 
-    it(' not found status code should be 404', function (done) {
+    it('not found status code is 404', function (done) {
         var response = buildResponse();
         var request = http_mocks.createRequest();
         response.on('end', function () {

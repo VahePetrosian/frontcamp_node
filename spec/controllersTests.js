@@ -1,20 +1,20 @@
 var request = require('supertest');
 var server = require('../server');
-describe('Request ', function () {
+describe('General requests', function () {
 
-  it(' can find /news', function testSlash(done) {
+  it('can find /news', function (done) {
     request(server)
       .get('/news')
       .expect(200, done);
   });
 
-  it(' return 404 on bad url', function testPath(done) {
+  it('returns 404 on bad url', function (done) {
     request(server)
       .get('/badurl')
       .expect(404, done);
   });
 
-  it(' requires AUTH for adding news', function testPath(done) {
+  it('requires not authorized when adding news without token', function (done) {
     request(server)
       .post('/news')
       .send({ user: 'testUser' })
@@ -22,12 +22,12 @@ describe('Request ', function () {
   });
 });
 
-describe('Api ', function () {
+describe('User and News api requests ', function () {
   var email = "email@email.com";
   var password = "password";
   var cookie;
   var newNewsId;
-  it(' can add new user', function testPath(done) {
+  it('can add new user', function (done) {
     request(server)
       .post('/users/register')
       .send({
@@ -43,7 +43,7 @@ describe('Api ', function () {
       });
   });
 
-  it(' no duplicate email is allowed', function testPath(done) {
+  it('duplicate email is not allowed', function (done) {
     request(server)
       .post('/users/register')
       .send({
@@ -55,7 +55,7 @@ describe('Api ', function () {
       .expect(409, done);
   });
 
-  it(' auth shoud work', function testPath(done) {
+  it('auth works', function (done) {
     request(server)
       .post('/users/testauth')
       .send({
@@ -65,7 +65,7 @@ describe('Api ', function () {
       .expect(200, done);
   });
 
-  it(' must return cookie on auth', function testPath(done) {
+  it('returns cookies on auth', function (done) {
     request(server)
       .post('/login')
       .send({
@@ -80,7 +80,7 @@ describe('Api ', function () {
       });
   });
 
-  it(' cookies work', function testPath(done) {
+  it('cookies are working as expected', function (done) {
     request(server)
       .post('/news')
       .set('Cookie', cookie)
@@ -102,7 +102,7 @@ describe('Api ', function () {
 
   });
 
-  it(' news delete works', function testPath(done) {
+  it('news deleting works', function (done) {
     request(server)
       .delete('/news')
       .set('Cookie', cookie)
@@ -110,7 +110,7 @@ describe('Api ', function () {
       .expect(204, done);
   });
 
-  it(' user delete works', function testSlash(done) {
+  it('user deleting works', function (done) {
     request(server)
       .delete(`/users/${email}`)
       .set('Cookie', cookie)
